@@ -406,6 +406,14 @@ mixin AutoScrollControllerMixin on ScrollController
     await move(begin > 0 ? begin : 0);
   }
 
+  double _positionToAlignment(AutoScrollPosition position) {
+    return position == AutoScrollPosition.begin
+        ? 0
+        : position == AutoScrollPosition.end
+            ? 1
+            : 0.5;
+  }
+
   AutoScrollPosition _alignmentToPosition(double alignment) => alignment == 0
       ? AutoScrollPosition.begin
       : alignment == 1
