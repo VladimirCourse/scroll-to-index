@@ -403,38 +403,7 @@ mixin AutoScrollControllerMixin on ScrollController
   Future _bringIntoViewportIfNeed(int index, AutoScrollPosition? preferPosition,
       Future move(double offset)) async {
     final begin = _directionalOffsetToRevealInViewport(index, 0);
-    final end = _directionalOffsetToRevealInViewport(index, 1);
-
-    if (preferPosition != null) {
-      double targetOffset = _directionalOffsetToRevealInViewport(
-          index, _positionToAlignment(preferPosition));
-
-      if (targetOffset < position.minScrollExtent)
-        targetOffset = position.minScrollExtent;
-      else if (targetOffset > position.maxScrollExtent)
-        targetOffset = position.maxScrollExtent;
-
-      await move(targetOffset);
-    } else {
-      final alreadyInViewport = offset < begin && offset > end;
-      if (!alreadyInViewport) {
-        double value;
-        if ((end - offset).abs() < (begin - offset).abs())
-          value = end;
-        else
-          value = begin;
-
-        await move(value > 0 ? value : 0);
-      }
-    }
-  }
-
-  double _positionToAlignment(AutoScrollPosition position) {
-    return position == AutoScrollPosition.begin
-        ? 0
-        : position == AutoScrollPosition.end
-            ? 1
-            : 0.5;
+    await move(begin > 0 ? begin : 0);
   }
 
   AutoScrollPosition _alignmentToPosition(double alignment) => alignment == 0
