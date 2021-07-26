@@ -2,7 +2,7 @@ name: scroll_to_index
 description: Scroll to a specific child of any scrollable widget in Flutter
 version: 2.0.0
 homepage: https://github.com/quire-io/scroll-to-index
-publish_to: None
+publish_to: 'none'
 environment:
   sdk: '>=2.12.0-0 <3.0.0'
 
